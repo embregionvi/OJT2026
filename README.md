@@ -10,19 +10,48 @@ This repository is the central hub for our Web App Development project. All inte
 
 ---
 
+## 📂 Project Structure & Module Logic
+To prevent overwriting each other's work and to keep code clean, we use a strict **Service-Layer Architecture**. Each module is split into these specific locations:
+
+| Layer | Location | Purpose |
+| :--- | :--- | :--- |
+| **Controllers** | `app/Controllers/[Module]/` | Handles HTTP requests and routing. |
+| **Services** | `app/Services/[Module]/` | **All Business Logic goes here.** (Calculations, data processing). |
+| **Models** | `app/Models/[Module]/` | Database interactions. |
+| **Views** | `app/Views/[Module]/` | All HTML/UI files (AdminLTE 4 / Bootstrap 5). |
+
+
+### **Example for "HR" Module:**
+- `app/Controllers/HR/CaseController.php`
+- `app/Services/HRService.php`
+- `app/Views/HR/cto_list.php`
+---
+
+
 ## 🛠️ First-Time Setup
 After cloning the repository, follow these steps to get the app running on your local machine:
 
 1. **Install Dependencies** Open your terminal and run:  
    `composer install`
 
-2. **Setup Environment File** - Locate the file named `env` in the root folder.
+2. **Setup Environment File & Database**
+   - Create a local MySQL database named `ojt2026`.
+   - Locate the file named `env` in the root folder.
    - Copy it and rename the copy to `.env`.
-   - Open `.env` and set:
+   - Open `.env` and configure your settings:
      - `CI_ENVIRONMENT = development`
-     - Database hostname, database name, username, and password.
+     - `database.default.hostname = localhost`
+     - `database.default.database = ojt2026`
+     - `database.default.username = root`
+     - `database.default.password = ` (leave empty if none)
 
-3. **Check Writable Folders** Ensure the following folders exist inside `/writable`. If not, create them:
+3. **Run Migrations & Seed** (For Shield & System Tables)
+   - Open your terminal and run:
+     `php spark migrate -all`
+   - Create the default admin user:
+     `php spark db:seed UserSeeder`
+
+4. **Check Writable Folders** Ensure the following folders exist inside `/writable`. If not, create them:
    - `cache/`, `debugbar/`, `logs/`, `session/`, `uploads/`
 
 ---
@@ -61,10 +90,8 @@ Then, go to the GitHub website and **Open a Pull Request**.
 
 ## 📂 Module Assignments
 
+Module - Name
+Cashier - Christian Ezekiel O. Calinao ; Patrick A. Meneses ; Alyssa Pasigna
+HR - Joeben A. Undar ; Melchor C. Jomelogo Jr.
+Learning and Dev Unit (LDU) - Joseph Benedict P. Bance ; Aeron Cunada ; Bernadette T. Del Castillo
 
-
-
-| Intern Name | Assigned Module | Key Files/Folders |
-| :--- | :--- | :--- |
-| [Name 1] | User Auth | Controllers/Auth.php, Views/auth/ |
-| [Name 2] | Inventory | Models/ProductModel.php, Views/products/ |
